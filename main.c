@@ -93,9 +93,10 @@ void l_insert_in_order(list* l, int v, int o) {
                 break;
             }
             if (p->dado >= i->dado && p->dado < i->proximo->dado) {
-                p->proximo = i->proximo;
-                p->anterior = i;
-                i->proximo = p;
+                p->proximo = i->proximo; // copia e cola endereço do noh com valor menor
+                p->anterior = i; // define endereco no novo noh para receber o noh menor
+                p->proximo->anterior = p; // define o noh com valor menor para receber o novo noh como anterior
+                i->proximo = p; // define noh menor para receber o novo noh
                 break;
             }
             i = i->proximo;
