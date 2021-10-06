@@ -13,7 +13,6 @@ typedef struct node node;
 struct list {
     node* cabeca;
     node* cauda;
-    int size;
 };
 typedef struct list list;
 
@@ -73,7 +72,6 @@ void l_insert_in_order(list* l, int v, int o) {
     if(l->cabeca == NULL){
         l->cabeca=p;
         l->cauda=p;
-        l->size++;
         return;
     }
     if(p->dado < l->cabeca->dado && o>0 || p->dado > l->cabeca->dado && o<0){
