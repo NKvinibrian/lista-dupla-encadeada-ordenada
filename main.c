@@ -69,12 +69,14 @@ void l_insert_in_order(list* l, int v, int o) {
     }
     node* p = malloc(sizeof(node));
     p->dado = v;
+    p->proximo = NULL;
+    p->anterior = NULL;
     if(l->cabeca == NULL){
         l->cabeca=p;
         l->cauda=p;
         return;
     }
-    if(p->dado < l->cabeca->dado && o>0 || p->dado > l->cabeca->dado && o<0){
+    if(((p->dado < l->cabeca->dado) && (o>0)) || (((p->dado > l->cabeca->dado) && (o<0)))){
         l->cabeca->anterior = p;
         p->proximo = l->cabeca;
         l->cabeca = p;
@@ -88,7 +90,7 @@ void l_insert_in_order(list* l, int v, int o) {
             l->cauda = p;
             break;
         }
-        if (p->dado >= i->dado && p->dado < i->proximo->dado && o>0 || p->dado <= i->dado && p->dado > i->proximo->dado && o<0) {
+        if (((p->dado >= i->dado) && (p->dado < i->proximo->dado) && (o>0)) || ((p->dado <= i->dado) && (p->dado > i->proximo->dado) && (o<0))) {
             p->proximo = i->proximo;
             p->anterior = i;
             p->proximo->anterior = p;
