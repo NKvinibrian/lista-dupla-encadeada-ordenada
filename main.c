@@ -76,32 +76,30 @@ void l_insert_in_order(list* l, int v, int o) {
         l->size++;
         return;
     }
-    if(p->dado < l->cabeca->dado){
+    if(p->dado < l->cabeca->dado && o>0 || p->dado > l->cabeca->dado && o<0){
         l->cabeca->anterior = p;
         p->proximo = l->cabeca;
         l->cabeca = p;
         return;
     }
-
     node* i = l->cabeca;
-    if (o>0) {
-        while (i != NULL) {
-            if (i->proximo == NULL) {
-                i->proximo = p;
-                p->anterior = l->cauda;
-                l->cauda = p;
-                break;
-            }
-            if (p->dado >= i->dado && p->dado < i->proximo->dado) {
-                p->proximo = i->proximo; // copia e cola endereço do noh com valor menor
-                p->anterior = i; // define endereco no novo noh para receber o noh menor
-                p->proximo->anterior = p; // define o noh com valor menor para receber o novo noh como anterior
-                i->proximo = p; // define noh menor para receber o novo noh
-                break;
-            }
-            i = i->proximo;
+    while (i != NULL) {
+        if (i->proximo == NULL) {
+            i->proximo = p;
+            p->anterior = l->cauda;
+            l->cauda = p;
+            break;
         }
+        if (p->dado >= i->dado && p->dado < i->proximo->dado && o>0 || p->dado <= i->dado && p->dado > i->proximo->dado && o<0) {
+            p->proximo = i->proximo;
+            p->anterior = i;
+            p->proximo->anterior = p;
+            i->proximo = p;
+            break;
+        }
+        i = i->proximo;
     }
+
 }
 
 /*** PROGRAMA DE TESTE (NAO ALTERAR!) ***/
